@@ -193,6 +193,126 @@ public static void reverse(int[] arr,int lo,int hi){
     }
 }
 
+->Maximum Difference Problem
+
+//method I
+public static int maxdiff(int[] arr){
+    int res = arr[1]-arr[0];
+    for(int i=0;i<arr.length-1;i++){
+        for(int j=i+1;j<arr.length;j++){
+            res = Math.max(arr[j]-arr[i]);
+        }
+    }
+    return res;
+}
+
+//method II
+public static int maxdiff(int[] arr){
+    int maxdiff = arr[1]-arr[0];
+    int minval = arr[0];
+    for(int i=1;i<arr.length;i++){
+        maxdiff = Math.max(maxdiff,arr[i]-minval);
+        minval = Math.min(minval,arr[i]);
+    }
+    return maxdiff;
+}
+
+->Maximum Consecutive One's
+
+public static int ConsecutiveOnes(int[] arr){
+    int res = 0;
+    int count = 0;
+    for(int i=0;i<arr.length;i++){
+        if(arr[i]==1){
+            count++;
+            res = Math.max(res,count);
+        }
+        else{
+            count=0;
+        }
+    }
+    return res;
+}
+
+->Longest Even Odd SubArray
+
+public static int LongestEvenOdd(int[] arr){
+    int count = 1;
+    int res = 1;
+    for(int i=1;i<arr.length;i++){
+        if((arr[i]%2==0 && arr[i-1]%2!=0) ||
+        (arr[i]%2!=0 && arr[i-1]%2==0)){
+            count++;
+            res = Math.max(res,count);
+        }
+        else{
+            count = 1;
+        }
+    }
+    return res;
+}
+
+->Maximum Circular Sum SubArray
+
+//method I
+public static int MaximumCircularSum(int[] arr){
+    int maxval = arr[0];
+    int sum = 0;
+    for(int i=0;i<arr.length;i++){
+        sum = 0;
+        for(int j=0;j<arr.length;j++){
+            int idx = (i+j)%arr.length;
+            sum += arr[idx];
+            maxval = Math.max(maxval,sum);
+        }
+    }
+    return maxval;
+}
+
+//method II
+public static int MaximumCircularSum(int[] arr){
+    int max_normal = MaximumSumSubarray(arr);
+    if(max_normal<0){
+        return max_normal;
+    }
+    int sum=0;
+    for(int i=0;i<arr.length;i++){
+        sum += arr[i];
+        arr[i] = -arr[i];
+    }
+    int max_circular = sum + MaximumSumSubarray(arr);
+    return Math.max(max_normal,max_circular);
+}
+
+public static int MaximumSumSubarray(int[] arr){
+    int maxending = arr[0];
+    int res = arr[0];
+    for(int i=1;i<arr.length;i++){
+        maxending = Math.max(maxending+arr[i],arr[i]);
+        res = Math.max(res,maxending);
+    }
+    return res;
+}
+
+->Minimum Consecutive Flips
+
+public static void MinimumConsecutiveFlips(int[] arr){
+    for(int i=1;i<arr.length;i++){
+        if(arr[i]!=arr[i-1]){
+            if(arr[i]!=arr[0]){
+                System.out.print("Start Index"+i);
+            }
+            else{
+                System.out.print("End Index"+i-1);
+            }
+        }
+    }
+    if(arr[n-1]!=arr[0]){
+        System.out.print("End Index"+n-1);
+    }
+    return ;
+}
+
 ->Leader in an Array
 
 //method I

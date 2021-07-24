@@ -408,3 +408,91 @@ public static int Majority(int[] arr){
     }
     return res;
 }
+
+->Frequency in an Sorted array
+
+public static void FrequencyInSortedArray(int[] arr){
+    int i=1;
+    int freq = 1;
+    while(i<arr.length){
+        while(i<arr.length && arr[i]==arr[i-1]){
+            freq++;
+            i++;
+        }
+        System.out.print(arr[i-1]+"Freq is"+freq);
+        freq=1;
+        i++;
+    }
+    return ;
+}
+
+->Stock buy and Sell
+
+//method I
+public static int MaxProfit(int[] arr,int start,int end){
+    if(start>=end){
+        return 0;
+    }
+    int profit = 0;
+    int curr_profit = 0;
+    for(int i=start;i<end;i++){
+        for(int j=i+1;j<=end;j++){
+            if(arr[j]>arr[i]){
+                curr_profit = arr[j]-arr[i] + 
+                MaxProfit(arr,start,i-1) +
+                MaxProfit(arr,j+1,end);
+                profit = Math.max(curr_profit,profit);
+            }
+        }
+    }
+    return profit;
+}
+
+//method II
+public static int MaxProfit(int[] arr){
+    int profit = 0;
+    for(int i=1;i<arr.length;i++){
+        if(arr[i]>arr[i-1]){
+            profit += arr[i]-arr[i-1];
+        }
+    }
+    return profit;
+}
+
+->Trapping Rain Water
+
+//method I
+public static int RainWaterTrapping(int[] arr){
+    int res = 0;
+    for(int i=1;i<arr.length-1;i++){
+        int lmax = arr[i];
+        for(int j=0;j<i;j++){
+            lmax = Math.max(lmax,arr[j]);
+        }
+        int rmax = arr[i];
+        for(int j=i+1;j<arr.length;j++){
+            rmax = Math.max(rmax,arr[i]);
+        }
+        res += (Math.min(lmax,rmax)-arr[i]);
+    }
+    return res;
+}
+
+//method II
+public static int RainWaterTrapping(int[] arr){
+    int[] lmax = new int[arr.length];
+    int[] rmax = new int[arr.length];
+    lmax[0] = arr[0];
+    for(int i=1;i<arr.length;i++){
+        lmax[i] = Math.max(lmax[i-1],arr[i]);
+    }
+    rmax[arr.length-1] = arr[arr.length-1];
+    for(int i=arr.length-2;i>=0;i--){
+        rmax[i] = Math.max(rmax[i+1],arr[i]);
+    }
+    int res = 0;
+    for(int i=1;i<arr.length-1;i++){
+        res += (Math.min(lmax[i],rmax[i])-arr[i]);
+    }
+    return res;
+}

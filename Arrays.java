@@ -409,6 +409,83 @@ public static int Majority(int[] arr){
     return res;
 }
 
+->Equilibrium Point
+
+//method I
+public static int EqbPoint(int[] arr){
+    for(int i=0;i<arr.length;i++){
+        int lsum=0,rsum=0;
+        for(int j=0;j<i;j++){
+            lsum += arr[j];
+        }
+        for(int j=i+1;j<arr.length;j++){
+            rsum += arr[j];
+        }
+        if(lsum==rsum){
+            return i;
+        }
+    }
+    return -1;
+}
+
+//method II
+public static int EqbPoint(int[] arr){
+    int sum = 0;
+    for(int i=0;i<arr.length;i++){
+        sum += arr[i];
+    }
+    int lsum = 0;
+    for(int i=0;i<arr.length;i++){
+        if(lsum == sum-arr[i]){
+            return i;
+        }
+        lsum += arr[i];
+        sum -= arr[i];
+    }
+    return -1;
+}
+
+->Prefix Sum Array
+
+public static int[] PrefixSum(int[] arr){
+    int n = arr.length;
+    int[] prefix = new int[n];
+    prefix[0] = arr[0];
+    for(int i=1;i<n;i++){
+        prefix[i] = prefix[i-1]+arr[i];
+    }
+    return prefix;
+}
+
+public static int getsum(int[] prefix,int l,int r){
+    if(l!=0){
+        return prefix[r]-prefix[l-1];
+    }
+    else{
+        return prefix[r];
+    }
+}
+
+->Maximum Occuring Element
+
+public static int MaximumOccuringElement(int[] left,int[] right){
+    int[] freq = new int[1000];
+    for(int i=0;i<left.length;i++){
+        freq[left[i]]++;
+        freq[right[i]+1]--;
+    }
+    int res = 0;
+    int maxfreq = freq[0];
+    for(int i=1;i<1000;i++){
+        freq[i] += freq[i-1];
+        if(freq[i]>maxfreq){
+            maxfreq = freq[i];
+            res = i;
+        }
+    }
+    return res;
+}
+
 ->Frequency in an Sorted array
 
 public static void FrequencyInSortedArray(int[] arr){

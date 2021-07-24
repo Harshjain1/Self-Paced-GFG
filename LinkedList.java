@@ -1,4 +1,11 @@
 ->Implement LRU Cache Design
+->Rotate a Linked List
+->Flatten a Linked List
+->Add two Numbers Represented by Linked List
+->Implement Queue using Linked List
+->Implement Stack using Linked List
+->Given a Linked List of 0's,1's and 2's ,Sort it   
+    
     
     
 ->middle of Linked List

@@ -1,3 +1,37 @@
+->Maximum Sum of K Consecutive Elements
+->Find Subarray with Given Sum
+->N-bonacci numbers
+->count triplets
+->Missing number in an array
+->merge two sorted arrays
+->rearrange array alternatively
+->number of pairs
+->inversion of array
+->sort an array of 0's,1's and 2's
+->minimum Platform
+->Reverse Array in groups
+->Pythagorean Triplet
+->chocolate distribution Problem
+->Stock buy and sell
+->Element with left side smaller and right side greater
+->convert array into Zigzag fashion
+->Last index of 1
+->Spirally traversing a Matrix
+->Largest Number formed from an Array
+->Repeating and Missing Number
+->Merge OverLapping intervals
+->Find duplicate in Array of Size n+1
+->set Matrix Zeros
+->Pascal Triangle
+->Next Permutation
+->Rotate a Matrix
+->Search in a 2D Matrix
+->Power(X,n)
+->Majority Element II
+->grid unique Paths
+->reverse Pairs
+
+
 ->Largest Element in an Array
 
 public static int largest(int[] arr){

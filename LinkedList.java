@@ -173,6 +173,85 @@ public static Node EvenAndOdd(Node head){
     return ohead;
 }
 
+->Intersection of two linked list
+
+public static Node IntersectionLL(Node head1,Node head2){
+    if(head1==null || head2==null){
+        return null;
+    }
+    int count1 = 0;
+    Node curr = head1;
+    while(curr!=null){
+        curr = curr.next;
+        count1++;
+    }
+    curr = head2;
+    int count2 = 0;
+    while(curr!=null){
+        count2++;
+        curr = curr.next;
+    }
+    if(count1>count2){
+        return getNode(head1,head2,count1-count2);
+    }
+    else{
+        return getNode(head2,head1,count2-count1);
+    }
+}
+
+public static Node getNode(Node head1,Node head2,int d){
+    Node curr1 = head1;
+    Node curr2 = head2;
+    for(int i=0;i<d;i++){
+        if(curr1==null){
+            return null;
+        }
+        curr1 = curr1.next;
+    }
+    while(curr1!=null && curr2!=null){
+        if(curr1.data==curr2.data){
+            return curr1;
+        }
+        curr1 = curr1.next;
+        curr2 = curr2.next;
+    }
+    return null;
+}
+
+->Pairwise swap nodes of a Linked list
+
+//method I
+public static void PairSwap(Node head){
+    Node curr = head;
+    while(curr!=null && curr.next!=null){
+        int temp = curr.data;
+        curr.data = curr.next.data;
+        curr.next.data = temp;
+        curr = curr.next.next;
+    }
+    return ;
+}
+
+//method II
+public static Node SwapNode(Node head){
+    if(head==null || head.next==null){
+        return head;
+    }
+    Node curr = head.next.next;
+    Node prev = head;
+    head = head.next;
+    head.next = prev;
+    while(curr!=null && curr.next!=null){
+        prev.next = curr.next;
+        prev = curr;
+        Node next = curr.next.next;
+        curr.next.next = curr;
+        curr = next;
+    }
+    prev.next = curr;
+    return head;
+}
+
 ->Clone a Linked List with random pointer
 
 //method I

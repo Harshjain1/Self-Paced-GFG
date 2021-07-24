@@ -224,3 +224,67 @@ public static void Leaders(int[] arr){
     }
     return ;
 }
+
+->Maximum Subarray Problem
+
+//method I
+public static int MaximumSumSubarray(int[] arr){
+    int res = 0;
+    for(int i=0;i<arr.length;i++){
+        sum = 0;
+        for(int j=i;j<arr.length;j++){
+            sum += arr[j];
+            res = Math.max(sum,res);
+        }
+    }
+    return res;
+}
+
+//method II
+public static int MaximumSumSubarray(int[] arr){
+    int maxending = arr[0];
+    int res = arr[0];
+    for(int i=1;i<arr.length;i++){
+        maxending = Math.max(maxending+arr[i],arr[i]);
+        res = Math.max(res,maxending);
+    }
+    return res;
+}
+
+->Majority Element
+
+//method I
+public static int Majority(int[] arr){
+    int freq = 0;
+    for(int i=0;i<arr.length;i++){
+        freq = 1;
+        for(int j=i+1;j<arr.length;j++){
+            if(arr[i]==arr[j]){
+                freq++;
+            }
+        }
+        if(freq>arr.length/2){
+            System.out.print(arr[i]);
+        }
+    }
+    return ;
+}
+
+//method II
+public static int Majority(int[] arr){
+    int count = 0;
+    int res = -1;
+    for(int i=0;i<arr.length;i++){
+        if(count==0){
+            count = 1;
+            res = arr[i];
+        }
+        else if(res==arr[i]){
+            count+=1;
+        }
+        else{
+            count-=1;
+        }
+    }
+    return res;
+}

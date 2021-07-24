@@ -484,6 +484,85 @@ public static Node DetectAndRemove(Node head){
     return curr;
 }
 
+->Reverse a Linked List in group of given size(LEETCODE)
+
+//method I
+public static Node ReverseInGivenSize(Node head,int k){
+    Node next=null,curr=head,prev=null;
+    int count=0;
+    int len = countNodes(head);
+    if(len<k){
+        return head;
+    }
+    while(curr!=null && count<k){
+        Node next = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = next;
+        count++;
+    }
+    if(next!=null){
+        Node rest_head = ReverseInGivenSize(next,k);
+        head.next = rest_head;
+    }
+    return prev;
+}
+ 
+public static int countNodes(Node curr){
+    int len = 0;
+    while(curr!=null){
+        len++;
+        curr=curr.next;
+    }
+    return len;
+}
+
+//method II
+public static Node ReverseInGivenSize(Node head,int k){
+    boolean isFirstPass=true;
+    boolean flag=true;
+    Node prevFirst=null;
+    Node curr=head;
+    while(curr!=null){
+        Node prev=null;
+        Node first=curr;
+        int count=0;
+        int len = countNodes(curr);
+        if(len<k){
+            flag = false;
+            break;
+        }
+        while(curr!=null && count<k){
+            Node next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+            count++;
+        }
+        if(isFirstPass){
+            head = prev;
+            isFirstPass = false;
+        }
+        else{
+            prevFirst.next = prev;
+        }
+        prevFirst = first;
+    }
+    if(flag==false){
+        prevFirst.next = curr;
+    }
+    return head;
+}
+
+public static int countNodes(Node curr){
+    int len = 0;
+    while(curr!=null){
+        len++;
+        curr=curr.next;
+    }
+    return len;
+}
+
 ->Remove Duplicate from a Sorted Linked List
 
 public static Node RemoveDuplicate(Node head){

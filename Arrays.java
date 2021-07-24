@@ -7,7 +7,7 @@
 ->rearrange array alternatively
 ->number of pairs
 ->inversion of array
-->sort an array of 0's,1's and 2's
+->sort an array of 0's,1's and 2's'
 ->minimum Platform
 ->Reverse Array in groups
 ->Pythagorean Triplet

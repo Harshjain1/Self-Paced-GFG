@@ -229,3 +229,213 @@ public static Node CloneaLL(Node head){
     return Nhead;
 }
 
+->Merge two sorted Linked List
+
+public static Node MergeTwoSortedLL(Node head1,Node head2){
+    if(head1==null){
+        return head2;
+    }
+    if(head2==null){
+        return head1;
+    }
+    Node Nhead=null,Ntail=null;
+    Node curr1=head1,curr2=head2;
+    if(curr1.data<curr2.data){
+        Nhead = curr1;
+        Ntail = curr1;
+    }
+    else{
+        Nhead = curr2;
+        Ntail = curr2;
+    }
+    while(curr1!=null && curr2!=null){
+        if(curr1.data<curr2.data){
+            Ntail.next = curr1;
+            Ntail = Ntail.next;
+        }
+        else{
+            Ntail.next = curr2;
+            Ntail = Ntail.next;
+        }
+    }
+    if(curr1!=null){
+        Ntail.next = curr1;
+    }
+    if(curr2!=null){
+        Ntail.next = curr2;
+    }
+    return Nhead;
+}
+
+->Pallindrome Linked List
+
+//method I
+public static boolean isPallindrome(Node head){
+    Stack<Integer> st = new Stack<>();
+    for(Node curr=head;curr!=null;curr=curr.next){
+        st.push(curr.data);
+    }
+    Node curr = head;
+    while(curr!=null){
+        if(st.pop()!=curr.data){
+            return false;
+        }
+        curr = curr.next;
+    }
+    return true;
+}
+
+//method II
+public static boolean Pallindrome(Node head){
+    Node slow = head;
+    Node fast = head;
+    while(fast.next!=null && fast.next.next!=null){
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    Node nhead = reverse(slow.next);
+    while(nhead!=null){
+        if(nhead.data!=head.data){
+            return false;
+        }
+        nhead = nhead.next;
+        head = head.next;
+    }
+    return true;
+}
+
+public static Node reverse(Node head){
+    Node curr = head;
+    Node prev = null;
+    while(curr!=null){
+        Node next = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+}
+
+->Detect loop(3 methods)
+
+//method I
+public static boolean IsCycle(Node head){
+    if(head==null || head.next==null){
+        return false;
+    }
+    Node temp = new Node(0);
+    Node curr = head;
+    while(curr!=null){
+        if(curr.next==null){
+            return false;
+        }
+        if(curr.next==temp){
+            return true;
+        }
+        Node next = curr.next;
+        curr.next = temp;
+        curr = next;
+    }
+    return false;
+}
+
+//method II
+public static boolean IsCycle(Node head){
+    if(head==null || head.next==null){
+        return false;
+    }
+    HashSet<Node> hs = new HashSet<>();
+    for(Node curr=head;curr!=null;curr=curr.next){
+        if(hs.contains(curr)==true){
+            return false;
+        }
+        hs.add(curr);
+    }
+    return true;
+}
+
+//method III
+public static boolean IsCycle(Node head){
+    if(head==null || head.next==null){
+        return false;
+    }
+    Node slow = head;
+    Node fast = head;
+    slow = slow.next;
+    fast = fast.next.next;
+    while(fast!=null && fast.next!=null){
+        if(slow==fast){
+            return true;
+        }
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    return false;
+}
+
+->Detect and remove Loop
+
+public static Node DetectAndRemove(Node head){
+    if(head==null || head.next==null){
+        return null;
+    }
+    Node curr = head;
+    Node slow = head;
+    Node fast = head;
+    slow = slow.next;
+    fast = fast.next.next;
+    boolean flag = false;
+    while(fast!=null && fast.next!=null){
+        if(slow==fast){
+            flag = true;
+            break;
+        }
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    if(flag == false){
+        return curr;
+    }
+    slow = head;
+    while(slow.next!=fast.next){
+        slow = slow.next;
+        fast = fast.next;
+    }
+    fast.next = null;
+    return curr;
+}
+
+->Remove Duplicate from a Sorted Linked List
+
+public static Node RemoveDuplicate(Node head){
+    Node curr = head;
+    while(curr!=null && curr.next!=null){
+        if(curr.data==curr.next.data){
+            curr = curr.next.next;
+        }
+        else{
+            curr = curr.next;
+        }
+    }
+    return head;
+}
+
+->Sorted insert in Singly Linked List
+
+public static Node SortedInsert(Node head,int data){
+    if(head==null){
+        return new Node(data);
+    }
+    Node curr = head;
+    Node temp = new Node(data);
+    if(data<head.data){
+        temp.next = head;
+        return temp;
+    }
+    while(curr.next!=null && curr.next.data>data){
+        curr = curr.next;
+    }
+    temp.next = curr.next;
+    curr.next = temp;
+    return head;
+}

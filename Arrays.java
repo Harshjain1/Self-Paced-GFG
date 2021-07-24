@@ -570,6 +570,76 @@ public static int MaxProfit(int[] arr){
     return profit;
 }
 
+->Spirally traversing a Matrix
+
+public static void traverse(int[][] matrix){
+    int rmin = 0,rmax = matrix.length-1;
+    int cmin = 0,cmax = matrix[0].length-1;
+    int tel = matrix.length*matrix[0].length;
+    while(tel>0){
+        for(int i=rmin;i<=rmax && tel>0;i++){
+            System.out.print(matrix[i][cmin]);
+            tel--;
+        }
+        cmin++;
+        for(int j=cmin;j<=cmax && tel>0;j++){
+            System.out.print(matrix[rmax][j]);
+            tel--;
+        }
+        rmax--;
+        for(int i=rmax;i>=rmin && tel>0;i--){
+            System.out.print(matrix[i][cmax]);
+            tel--;
+        }
+        cmax--;
+        for(int j=cmax;j>=cmin && tel>0;j--){
+            System.out.print(matrix[rmin][j]);
+            tel--;
+        }
+        rmin++;
+    }
+    return ;
+}
+
+->Power(X,n)
+
+public static int Power(int a,int b){
+    if(b==0){
+        return 1;
+    }
+    int res = Power(a,b/2);
+    res *= res;
+    return b%2==0?res:res*a;
+}
+
+->sort an array of 0's,1's and 2's
+
+public static void SortAnArray(int[] arr){
+    int lo=0,mid=0;
+    int hi=arr.length-1;
+    while(mid<=hi){
+        if(arr[mid]==0){
+            swap(arr,lo,mid);
+            lo++;
+            mid++;
+        }
+        else if(arr[mid]==1){
+            mid++;
+        }
+        else{
+            swap(arr,lo,hi);
+            hi--;
+        }
+    }
+}
+
+public static void swap(int[] arr,int lo,int hi){
+    int temp = arr[lo];
+    arr[lo] = arr[hi];
+    arr[hi] = temp;
+    return ;
+}
+
 ->Trapping Rain Water
 
 //method I

@@ -677,3 +677,185 @@ public static int RainWaterTrapping(int[] arr){
     }
     return res;
 }
+
+
+->Merge OverLapping intervals
+
+public static int[] MergeIntervals(int[][] intervals){
+    ArrayList<int[]> res = new ArrayList<>();
+    if(intervals.length==0 || intervals==null){
+        return res.toArray(new int[res.size()][]);
+    }
+    Arrays.sort(intervals,(a,b)->a[0]-b[0]);
+    int start = intervals[0][0];
+    int end = intervals[0][1];
+    for(int[] arr : intervals){
+        if(end >= arr[0]){
+            end = Math.max(end,arr[1]);
+        }
+        else{
+            res.add(new int{start,end});
+            start = arr[0];
+            end = arr[1];
+        }
+    }
+    res.add(new int{start,end});
+    return res.toArray(new int[res.size()][]);
+}
+
+->Majority Element II
+
+public static ArrayList<Integer> MajotityElementII(int[] arr){
+    int ele1 = -1;
+    int ele2 = -1;
+    int c1=0,c2=0;
+    for(int val : arr){
+        if(c1==0){
+            c1=1;
+            ele1=val;
+        }
+        else if(c2==0){
+            c2=1;
+            ele2=val;
+        }
+        else if(val==ele1){
+            c1++;
+        }
+        else if(val==ele2){
+            c2++;
+        }
+        else{
+            c1-=1;
+            c2-=1;
+        }
+    }
+}
+
+->Next Permutation
+
+public void nextPermutation(int[] nums){
+    int n = nums.length;
+    int idx1 = 0;
+    boolean flag = false;
+    for(int i=n-2;i>=0;i--){
+        if(nums[i+1]>nums[i]){
+            idx1 = i;
+            flag = true;
+            break;
+        }
+    }
+    if(flag == false){
+        reverse(nums,0,n-1);
+        return ;
+    }
+    for(int j=n-1;j>=0;j--){
+        if(nums[j]>nums[idx1]){
+            int temp = nums[idx1];
+            nums[idx1] = nums[j];
+            nums[j] = temp;
+            break;
+        }
+    }
+    reverse(nums,idx1+1,n-1);
+}
+
+public void reverse(int[] nums,int li,int hi){
+    while(li<hi){
+        int temp = nums[li];
+        nums[li] = nums[hi];
+        nums[hi] = temp;
+        li++;
+        hi--;
+    }
+}
+
+->Search in a 2D Matrix
+
+//method I
+public static boolean SearchInMatrix(int[][] matrix,int val){
+    int i=0,j=matrix.length-1;
+    while(i<matrix.length && j>=0){
+        if(matrix[i][j]==val){
+            return true;
+        }
+        else if(matrix[i][j]>val){
+            j--;
+        }
+        else{
+            i++;
+        }
+    }
+    return false;
+}
+
+//method II
+public static boolean SearchInMatrix(int[][] matrix,int val){
+    int lo=0,hi=matrix.length*matrix[0].length-1;
+    int n = matrix.length;
+    int m = matrix[0].length;
+    while(lo<=hi){
+        int mid = (lo+hi)/2;
+        if(arr[mid/n][mid%m]==val){
+            return true;
+        }
+        else if(arr[mid/n][mid%m]>val){
+            hi=mid-1;
+        }
+        else{
+            lo=mid+1;
+        }
+    }
+    return false;
+}
+
+->Find Subarray with Given Sum
+
+public static void SubArraySum(int[] arr,int sum){
+    int curr_sum=arr[0],start=0;
+    for(int i=1;i<arr.length;i++){
+        while(curr_sum>sum && start<i-1){
+            curr_sum -= arr[start];
+            start++;
+        }
+        if(curr_sum==sum){
+            int end = i-1;
+            System.out.print("Start Index"+start+"End Index"+end);
+            return ;
+        }
+        if(i<n){
+            curr_sum += arr[i];
+        }
+    }
+    return ;
+}
+
+->Sum of K Consecutive Elements
+
+//method I
+public static int SumOfKConsecutiveElements(int[] arr,int k){
+    int n = arr.length;
+    int sum = Integer.MIN_VALUE;
+    for(int i=0;i+k-1<n;i++){
+        int curr_sum=0;
+        for(int j=0;j<k;j++){
+            curr_sum += arr[i+j];
+        }
+        sum = Math.max(sum,curr_sum);
+    }
+    return sum;
+}
+
+//method II
+public static int SumOfKConsecutiveElements(int[] arr,int k){
+    int curr_sum = 0;
+    for(int i=0;i<k;i++){
+        curr_sum += arr[i];
+    }
+    int sum = curr_sum;
+    for(int i=k;i<arr.length;i++){
+        curr_sum += arr[i]-arr[i-k];
+        sum = Math.max(sum,curr_sum);
+    }
+    return sum;
+}
+

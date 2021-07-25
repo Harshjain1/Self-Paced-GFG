@@ -347,6 +347,109 @@ public static void MinimumConsecutiveFlips(int[] arr){
     return ;
 }
 
+->N-bonacci numbers
+
+//m>n
+public static int NBonacciNumber(int n,int m){
+    int[] arr = new int[m];
+    for(int i=0;i<m;i++){
+        arr[i]=0;
+    }
+    arr[n-1]=1;
+    arr[n]=1;
+    for(int i=n+1;i<m;i++){
+        arr[i] = 2*arr[i-1]-arr[i-n-1];
+    }
+    return arr[m-1];
+}
+
+->merge two sorted arrays
+
+public static void MergeInplace(int[] X,int[] Y){
+    int m = X.length;
+    int n = Y.length;
+    for(int i=0;i<m;i++){
+        if(X[i]>Y[0]){
+            int temp = X[i];
+            X[i] = Y[0];
+            Y[0] = temp;
+            
+            int val = Y[0];
+            for(int k=1;k<n && Y[k]<val;k++){
+                Y[k-1]=Y[k];
+            }
+            Y[k-1]=val;
+        }
+    }
+    return ;
+}
+
+->Missing number in an array
+
+//method I
+public static int MissingNumber(int[] arr){
+    int n = arr.length;
+    int m = n+1; // since one no is missing
+    int sum = m*(m+1)/2;
+    for(int i=0;i<n;i++){
+        sum -= arr[i];
+    }
+    return sum;
+}
+
+//method II
+public static int FindMissingNumber(int[] arr){
+    int xor = 0;
+    for(int val : arr){
+        xor = xor^val;
+    }
+    for(int i=1;i<=arr.length+1;i++){
+        xor = xor^i;
+    }
+    return xor;
+}
+
+->Find duplicate in Array of Size n+1
+
+//method I
+public static int FindDuplicate(int[] arr){
+    int n = arr.length;
+    boolean[] visited = new int[n+1];
+    for(int val : arr){
+        if(visited[val]==true){
+            return val;
+        }
+        visited[val]=true;
+    }
+    return -1;
+}
+
+//method II
+public static int FindDuplicate(int[] arr){
+    int xor = 0;
+    for(int val : arr){
+        xor ^= val;
+    }
+    for(int i=1;i<=arr.length-1;i++){
+        xor ^= i;
+    }
+    return xor;
+}
+
+->Print Pascal Triangle
+
+public static void PrintPattern(int n){
+    for(int i=0;i<n;i++){
+        int ncr = 1;
+        for(int j=0;j<=i;j++){
+            System.out.print(ncr+" ");
+            int ncr1 = ((i-j)*ncr)/(j+1);
+            ncr = ncr1;
+        }
+        System.out.println();
+    }
+}
+
 ->Leader in an Array
 
 //method I
@@ -858,4 +961,6 @@ public static int SumOfKConsecutiveElements(int[] arr,int k){
     }
     return sum;
 }
+
+
 

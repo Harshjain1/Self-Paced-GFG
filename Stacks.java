@@ -144,7 +144,99 @@ public static class StackfromQueue {
 }
 
 
-->Queue using two stacks
+->queue from stack (add efficient)
+
+public static class QueuefromStack{
+    Stack<Integer> mainS;
+    Stack<Integer> helperS;
+
+    public QueuefromStack(){
+      mainS = new Stack<>();
+      helperS = new Stack<>();
+    }
+
+    int size() {
+        return mainS.size();
+    }
+
+    void add(int val) {
+        mainS.push(val);
+    }
+
+    int remove() {
+        if (mainS.size() == 0) {
+            System.out.println("Queue underflow");
+            return -1;
+        }
+        while (mainS.size() > 1) {
+            helperS.push(mainS.pop());
+        }
+        int val = mainS.pop();
+        while (helperS.size() > 0) {
+            mainS.push(helperS.pop());
+        }
+        return val;
+    }
+
+    int peek() {
+        if (mainS.size() == 0) {
+            System.out.println("Queue underflow");
+            return -1;
+        }
+        while (mainS.size() > 1) {
+            helperS.push(mainS.pop());
+        }
+        int val = mainS.peek();
+        while (helperS.size() > 0) {
+            mainS.push(helperS.pop());
+        }
+        return val;
+    }
+}
+
+->queue from stack(remove efficient)
+
+public static class QueuefromStack{
+    Stack<Integer> mainS;
+    Stack<Integer> helperS;
+
+    public QueuefromStack() {
+        mainS = new Stack<>();
+        helperS = new Stack<>();
+    }
+
+    int size(){
+        return mainS.size();
+    }
+
+    void add(int val){
+        while (mainS.size() > 0) {
+            helperS.push(mainS.pop());
+        }
+        mainS.push(val);
+        while (helperS.size() > 0) {
+            mainS.push(helperS.pop());
+        }
+    }
+
+    int remove(){
+        if (mainS.size() == 0) {
+            System.out.println("Queue underflow");
+            return -1;
+        }
+        return mainS.pop();
+    }
+
+    int peek(){
+        if (mainS.size() == 0) {
+            System.out.println("Queue underflow");
+            return -1;
+        }
+        return mainS.peek();
+    }
+}
+
+
 ->Get Minimum Element from Stack (2 Methods)
 ->LRU Cache
 ->Circular tour

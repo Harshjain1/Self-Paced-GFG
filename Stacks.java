@@ -236,6 +236,88 @@ public static class QueuefromStack{
     }
 }
 
+->2 Stack in an Array
+
+public static class TwoStack{
+    int[] data;
+    int tos1;
+    int tos2;
+
+    public TwoStack(int cap) {
+        data = new int[cap];
+        tos1 = -1;
+        tos2 = cap;
+    }
+
+    int size1() {
+        return tos1 + 1;
+    }
+
+    int size2() {
+        return data.length - tos2;
+    }
+
+    void push1(int val) {
+        if(tos1 + 1 < tos2) {
+            data[tos1 + 1] = val;
+            tos1++;
+        } else {
+            System.out.println("Stack overflow");
+        }
+    }
+
+    void push2(int val) {
+        if(tos1 + 1 < tos2) {
+            data[tos2 - 1] = val;
+            tos2--;
+        } else {
+            System.out.println("Stack overflow");
+        }
+    }
+
+    int pop1() {
+        if(tos1 == -1) {
+            System.out.println("Stack underflow");
+            return -1;
+        } else {
+            int val = data[tos1];
+            tos1--;
+            return val;
+        }
+    }
+
+    int pop2() {
+        if(tos2 == data.length) {
+            System.out.println("Stack underflow");
+            return -1;
+        } else {
+            int val = data[tos2];
+            tos2++;
+            return val;
+        }
+    }
+
+    int top1() {
+        if(tos1 == -1) {
+            System.out.println("Stack underflow");
+            return -1;
+        } else {
+            int val = data[tos1];
+            return val;
+        }
+    }
+
+    int top2() {
+        if(tos2 == data.length) {
+            System.out.println("Stack underflow");
+            return -1;
+        } else {
+            int val = data[tos2];
+            return val;
+        }
+    }
+}
+
 
 ->Get Minimum Element from Stack (2 Methods)
 ->LRU Cache

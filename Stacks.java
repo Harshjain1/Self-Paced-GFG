@@ -48,8 +48,103 @@ public static int[] nextLarger(int[] arr){
     return res;
 }
 
+->Stack using Queue (Push Efficient)
+
+public static class StackfromQueue{
+    Queue<Integer> mainQ;
+    Queue<Integer> helperQ;
+
+    public StackfromQueue() {
+        mainQ = new ArrayDeque<>();
+        helperQ = new ArrayDeque<>();
+    }
+
+    int size() {
+        return mainQ.size();
+    }
+
+    void push(int val) {
+        mainQ.add(val);
+    }
+
+    int pop() {
+        if (mainQ.size() == 0) {
+            System.out.println("Stack underflow");
+            return -1;
+        }
+
+        while (mainQ.size() > 1) {
+            helperQ.add(mainQ.remove());
+        }
+        int val = mainQ.peek();
+        mainQ.remove();
+        Queue<Integer> temp = mainQ;
+        mainQ = helperQ;
+        helperQ = temp;
+        return val;
+    }
+
+    int top() {
+        if (mainQ.size() == 0) {
+            System.out.println("Stack underflow");
+            return -1;
+        }
+
+        while (mainQ.size() > 1) {
+            helperQ.add(mainQ.remove());
+        }
+        int val = mainQ.peek();
+        helperQ.add(mainQ.remove());
+        Queue<Integer> temp = mainQ;
+        mainQ = helperQ;
+        helperQ = temp;
+        return val;
+    }
+}
+
+->Stack using Queue(Pop Efficient)
+
+public static class StackfromQueue {
+    Queue<Integer> mainQ;
+    Queue<Integer> helperQ;
+
+    public StackfromQueue() {
+      mainQ = new ArrayDeque<>();
+      helperQ = new ArrayDeque<>();
+    }
+
+    int size() {
+        return mainQ.size();
+    }
+
+    void push(int val) {
+        helperQ.add(val);
+        while (mainQ.size() > 0) {
+            helperQ.add(mainQ.remove());
+        }
+        mainQ = helperQ;
+        helperQ = new ArrayDeque<>();
+    }
+
+    int pop() {
+        if (mainQ.size() == 0) {
+            System.out.println("Stack underflow");
+            return -1;
+        }
+        return mainQ.remove();
+    }
+
+    int top() {
+        if (mainQ.size() == 0) {
+            System.out.println("Stack underflow");
+            return -1;
+        }
+        return mainQ.peek();
+    }
+}
+
+
 ->Queue using two stacks
-->Stacks using two Queues
 ->Get Minimum Element from Stack (2 Methods)
 ->LRU Cache
 ->Circular tour
